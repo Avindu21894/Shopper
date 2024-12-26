@@ -142,6 +142,70 @@ app.get('/allproducts', async (req, res) =>{
     res.send(products);
 })
 
+// Schema for User Model
+
+const Users = mongoose.model('Users', {
+    name:{
+        type: String,
+    },
+    email:{
+        type: String,
+        unique: true,
+    },
+    password:{
+        type: String,
+    },
+    cartData:{
+        type:Object,
+    },
+    date:{
+        type: Date,
+        default: Date.now,
+    }
+})
+
+// Creating endpoint for Registering the user
+
+app.post('/signup', async (req, res) => {
+    try {
+        // Check if a user already exists with the provided email
+        let check = await Users.findOne({ email: req.body.email });
+        if (check) {
+            return res.status(400).json({ success: false, errors: "Existing user found with the same email address" });
+        }
+
+        // Initialize a cart object
+        let cart = {};
+        for (let index = 0; index < 300; index++) {
+            cart[index] = 0; // Corrected cart key to use `index` instead of `i`
+        }
+
+        // Create a new user
+        const user = new Users({
+            name: req.body.username,
+            email: req.body.email,
+            password: req.body.password, // Plain text password (ensure this is intentional)
+            cartData: cart,
+        });
+
+        await user.save();
+
+        // Prepare JWT payload
+        const data = {
+            user: {
+                id: user.id,
+            },
+        };
+
+        // Sign JWT
+        const token = jwt.sign(data, 'secret_ecom'); // Consider moving 'secret_ecom' to environment variables
+        res.json({ success: true, token });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, errors: "Internal server error" });
+    }
+});
+
 
 app.listen(port,(error) => {
     if(!error) {
