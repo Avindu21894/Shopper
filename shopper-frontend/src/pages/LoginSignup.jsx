@@ -15,24 +15,43 @@ export const LoginSignup = () => {
 
   const login = async () => {
     console.log("Login", formData);
-    let responseData;
-    await fetch('http://localhost:4000/login', {
-      method: 'POST',
-      headers: {
-        Accept:'application/form-data',
-        'content-type': 'application/json',
-      },
-      body:JSON.stringify(formData)
-    }).then((response)=>response.json()).then((data)=>responseData=data);
-    if(responseData.success){
-      localStorage.setItem('auth-token',responseData.token);
-      window.location.replace("/");
+  
+    try {
+      const response = await fetch('http://localhost:4000/login', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json', // Correct Accept header
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        // Handle HTTP errors
+        const errorData = await response.json();
+        alert(errorData.errors || "Invalid email or password.");
+        return;
+      }
+  
+      const responseData = await response.json();
+  
+      if (responseData.success && responseData.token) {
+        // Login successful
+        localStorage.setItem('auth-token', responseData.token);
+        window.location.replace("/");
+      } else {
+        // Handle invalid credentials or other issues
+        alert(responseData.errors || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      // Handle network errors or unexpected issues
+      console.error("An error occurred during login:", error);
+      alert("An error occurred. Please try again later.");
     }
-    else{
-      alert(responseData.errors)
-    }
-    
-  }
+  };
+  
+
+  
   const signup = async () => {
     console.log("signup", formData);
     let responseData;
