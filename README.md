@@ -18,7 +18,7 @@
   <p>Tech Stack - MERN Stack</p>
   <div class="image-list">
     <div class="image-item">
-      <img src="https://drive.google.com/file/d/1onzmSqaHOvaek-ryKFh08qFf6wCpLlv-/view?usp=drive_link" alt="Image 1">
+      <img src="https://drive.google.com/uc?id=1onzmSqaHOvaek-ryKFh08qFf6wCpLlv-" alt="Image 1">
     </div>
     <div class="image-item">
       <img src="" alt="Image 2">
