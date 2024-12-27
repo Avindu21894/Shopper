@@ -7,7 +7,7 @@ export const Popular = () => {
   const[popularProducts,setPopularProducts] = useState([]);
 
   useEffect(() =>{
-    fetch('https://shopper-backend-j10r.onrender.com/popularinwomen')
+    fetch('http://localhost:4000/popularinwomen')
     .then((response)=>response.json())
     .then((data)=>setPopularProducts(data));
   },[])

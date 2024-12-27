@@ -17,7 +17,7 @@ export const LoginSignup = () => {
     console.log("Login", formData);
   
     try {
-      const response = await fetch('https://shopper-backend-j10r.onrender.com/login', {
+      const response = await fetch('http://localhost:4000/login', {
         method: 'POST',
         headers: {
           Accept: 'application/json', // Correct Accept header
@@ -55,7 +55,7 @@ export const LoginSignup = () => {
   const signup = async () => {
     console.log("signup", formData);
     let responseData;
-    await fetch('https://shopper-backend-j10r.onrender.com/signup', {
+    await fetch('http://localhost:4000/signup', {
       method: 'POST',
       headers: {
         Accept:'application/form-data',

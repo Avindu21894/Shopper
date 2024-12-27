@@ -7,7 +7,7 @@ export const NewCollections = () => {
   const[new_collection,setNew_Collection] = useState([]);
 
 useEffect(() =>{
-  fetch('https://shopper-backend-j10r.onrender.com/newCollections')
+  fetch('http://localhost:4000/newCollections')
   .then((response) => response.json())
   .then((data)=>setNew_Collection(data))
 },[])
