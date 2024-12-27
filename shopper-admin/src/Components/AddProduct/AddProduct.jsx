@@ -33,7 +33,7 @@ const AddProduct = () => {
         formData.append('product', image); // Append the image file correctly
 
         // Send POST request to backend
-        await fetch('http://localhost:4000/upload', {
+        await fetch('https://shopper-backend-j10r.onrender.com/upload', {
             method: 'POST',
             headers: {
                 Accept: 'application/json'
@@ -49,7 +49,7 @@ const AddProduct = () => {
         // if (responseData.success) {
         //     product.image = responseData.image_url; // Set image URL in the product details
         //     console.log(product);
-        //     await fetch('http://localhost:4000/addproduct',{
+        //     await fetch('https://shopper-backend-j10r.onrender.com/addproduct',{
         //         method: 'POST',
         //         headers:{
         //             Accept: 'application/json',
@@ -68,7 +68,7 @@ const AddProduct = () => {
             console.log(product);
         
             try {
-                const response = await fetch('http://localhost:4000/addproduct', {
+                const response = await fetch('https://shopper-backend-j10r.onrender.com/addproduct', {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
